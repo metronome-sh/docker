@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Initialize default values
-APP_URL="http://localhost"
+APP_URL="localhost"
 APP_PORT="3000"
 MAXMIND_LICENSE_KEY=""
 
@@ -75,15 +75,7 @@ EOF
 # Output to Caddyfile
 echo "$CADDY_TEMPLATE" > ./Caddyfile
 
-#Copy docker-compose.yml and Dockerfile
-cp ./deploy/setup-docker/docker-compose.yml ./docker-compose.yml
-cp ./deploy/setup-docker/Dockerfile ./Dockerfile
-cp ./deploy/setup-docker/Dockerfile.workers ./Dockerfile.workers
-
-
 # Display result message
 echo "✅ .env file created with secrets"
-echo "🐳 docker-compose.yml created"
-echo "🐳 Dockerfile created"
 echo "🔒 Caddyfile created"
-echo "You may now run docker-compose up to start Metronome"
+echo "You may now run docker-compose up -d to start Metronome"
