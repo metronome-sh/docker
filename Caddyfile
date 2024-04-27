@@ -1,7 +1,7 @@
-http://localhost {
+http://DOMAIN_NAME {
   redir https://{host}{uri}
 }
 
-https://localhost {
+https://DOMAIN_NAME {
   reverse_proxy web:3000
 }

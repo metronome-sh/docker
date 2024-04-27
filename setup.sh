@@ -31,6 +31,9 @@ done
 DB_PASSWORD=$(head /dev/urandom | LC_ALL=C tr -dc A-Za-z0-9 | head -c34)
 SESSION_SECRET=$(head /dev/urandom | LC_ALL=C tr -dc A-Za-z0-9 | head -c34)
 REDIS_PASSWORD=$(head /dev/urandom | LC_ALL=C tr -dc A-Za-z0-9 | head -c34)
+S3_KMS_MASTER_KEY=$(openssl rand -base64 32)
+S3_SECRET_ACCESS_KEY=$(head /dev/urandom | LC_ALL=C tr -dc A-Za-z0-9 | head -c34)
+CLICKHOUSE_PASSWORD=$(head /dev/urandom | LC_ALL=C tr -dc A-Za-z0-9 | head -c34)
 
 # Read .env.example into a variable
 envExample=$(cat ./.env.example)
@@ -44,6 +47,9 @@ awk -v app_url="https://$APP_URL" \
     -v session_secret="$SESSION_SECRET" \
     -v redis_url="redis://redis:6379"\
     -v redis_pass="$REDIS_PASSWORD" \
+    -v s3_kms_master_key="$S3_KMS_MASTER_KEY" \
+    -v s3_secret_access_key="$S3_SECRET_ACCESS_KEY" \
+    -v clickhouse_pass="$CLICKHOUSE_PASSWORD" \
     -v node_env="production"\
     'BEGIN {OFS=FS="="}
     /NODE_ENV/ {$2="\"" node_env "\""}
@@ -56,6 +62,9 @@ awk -v app_url="https://$APP_URL" \
     /REDIS_QUEUE_PASSWORD/ {$2="\"" redis_pass "\""}
     /REDIS_CACHE_PASSWORD/ {$2="\"" redis_pass "\""}
     /REDIS_UNIQUE_PASSWORD/ {$2="\"" redis_pass "\""}
+    /CLICKHOUSE_PASSWORD/ {$2="\"" clickhouse_pass "\""}
+    /S3_SECRET_ACCESS_KEY/ {$2="\"" s3_secret_access_key "\""}
+    /S3_KMS_MASTER_KEY/ {$2="\"" s3_kms_master_key "\""}
     { if ($1 != "") print $1 "=" $2; else print "" }' ./.env.example > ./.env
 
 # Caddyfile
