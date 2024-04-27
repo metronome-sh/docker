@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "🚀 Setting up Metronome..."
+
 # Initialize default values
 APP_URL="localhost"
 APP_PORT="3000"
@@ -84,7 +86,12 @@ EOF
 # Output to Caddyfile
 echo "$CADDY_TEMPLATE" > ./Caddyfile
 
+# Clone https://github.com/metronome-sh/metronome
+rm -rf metronome
+git clone --quiet https://github.com/metronome-sh/metronome.git metronome
+
 # Display result message
 echo "✅ .env file created with secrets"
 echo "🔒 Caddyfile created"
+echo "📦 Metronome repository cloned"
 echo "You may now run docker-compose up -d to start Metronome"
