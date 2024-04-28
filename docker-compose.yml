@@ -113,7 +113,7 @@ services:
       CLICKHOUSE_USER: "${CLICKHOUSE_USER}"
       CLICKHOUSE_PASSWORD: "${CLICKHOUSE_PASSWORD}"
       CLICKHOUSE_DB: "${CLICKHOUSE_DB}"
-      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
     volumes:
       - "clickhouse:/var/lib/clickhouse"
       - "./metronome/packages/db/clickhouse/docker/postgres.xml.template:/etc/clickhouse-server/config.d/postgres.xml.template"
