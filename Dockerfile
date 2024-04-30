@@ -14,10 +14,4 @@ RUN pnpm i
 
 RUN pnpm build
 
-# Remove node_modules from everywhere
-RUN find . '(' -name \"node_modules\" ')' -type d -prune -exec rm -rf '{}' +
-
-# Reinstall only production dependencies
-RUN pnpm i --prod
-
 CMD ["pnpm", "--filter", "@metronome/web", "start"]
