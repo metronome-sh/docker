@@ -24,7 +24,7 @@ services:
       redis:
         condition: service_healthy
     restart: always
-    command: /bin/sh -c "pnpm --filter @metronome/db configure && pnpm --filter @metronome/web start"
+    command: /bin/sh -c "pnpm --filter @metronome/db configure && pnpm --filter @metronome/web dev"
     healthcheck:
       test: "curl --fail http://localhost:${APP_PORT}/healthcheck"
       interval: 30s
