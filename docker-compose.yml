@@ -116,9 +116,6 @@ services:
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
     volumes:
       - "clickhouse:/var/lib/clickhouse"
-      - "./metronome/packages/db/clickhouse/docker/postgres.xml.template:/etc/clickhouse-server/config.d/postgres.xml.template"
-      - "./metronome/packages/db/clickhouse/docker/entrypoint.sh:/entrypoint-patch.sh"
-    entrypoint: ["/entrypoint-patch.sh"]
     networks:
       - metronome-network
 
