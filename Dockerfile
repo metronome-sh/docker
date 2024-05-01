@@ -8,7 +8,8 @@ RUN npm install -g pnpm
 
 WORKDIR /home/node/app
 
-COPY ./metronome .
+RUN git clone https://github.com/metronome-sh/metronome.git .
+RUN git checkout vite-migration
 
 RUN pnpm i
 
